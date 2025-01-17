@@ -21,3 +21,29 @@ jobs:
       with:
         name: x86-64_glibc
         path: ./*.tar.xz
+    - name: info
+      id: info
+      run: echo "timestamp=$(date +%Y%m%d%H%M%S%N)" >> "$GITHUB_OUTPUT" && echo "asset_name=$(echo *.tar.xz)" >> "$GITHUB_OUTPUT"
+    - uses: actions/download-artifact@v4
+      with:
+        name: static_python_normal
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: tag_${{ steps.info.outputs.timestamp }}
+        release_name: x86-64_glibc toolchain
+        draft: false
+        prerelease: true
+    - name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./${{ steps.info.outputs.asset_name }}
+        asset_name: ${{ steps.info.outputs.asset_name }}
+        asset_content_type: application/x-gtar
