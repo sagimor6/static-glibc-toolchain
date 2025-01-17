@@ -2,9 +2,9 @@
 
 BASE_DIR="$(dirname "${BASE_SOURCE:-$0}")"
 BASE_DIR="$(cd "${BASE_DIR}" &> /dev/null && pwd)"
-BUILD_DIR="${BUILD_DIR:-${BASE_DIR}/build2}"
+BUILD_DIR="${BUILD_DIR:-${BASE_DIR}/build}"
 BUILD_DIR=$(realpath "${BUILD_DIR}")
-OUTPUT_DIR="${OUTPUT_DIR:-${BASE_DIR}/output2}"
+OUTPUT_DIR="${OUTPUT_DIR:-${BASE_DIR}/output}"
 OUTPUT_DIR=$(realpath "${OUTPUT_DIR}")
 
 CTNG_URL="https://github.com/crosstool-ng/crosstool-ng/releases/download/crosstool-ng-1.26.0/crosstool-ng-1.26.0.tar.xz"
