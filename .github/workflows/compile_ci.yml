@@ -24,9 +24,6 @@ jobs:
     - name: info
       id: info
       run: echo "timestamp=$(date +%Y%m%d%H%M%S%N)" >> "$GITHUB_OUTPUT" && echo "asset_name=$(echo *.tar.xz)" >> "$GITHUB_OUTPUT"
-    - uses: actions/download-artifact@v4
-      with:
-        name: static_python_normal
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
